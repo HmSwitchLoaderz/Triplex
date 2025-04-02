@@ -715,9 +715,12 @@ function GroupTypes:CreateBypassin(name, placeholder, callback)
 
     local TextBoxTypes = {}
     
+    -- Create the UI elements
     local title = Instance.new("TextLabel")
     local textbox = Instance.new("TextBox")
-
+    local slider = Instance.new("Frame") -- Used to keep the look of the slider
+    
+    -- Title label setup
     title.Name = "title"
     title.Parent = container_2
     title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -732,12 +735,20 @@ function GroupTypes:CreateBypassin(name, placeholder, callback)
     title.TextXAlignment = Enum.TextXAlignment.Left
     title.TextYAlignment = Enum.TextYAlignment.Top
 
+    -- Slider background frame (keeps the slider look)
+    slider.Name = "slider"
+    slider.Parent = title
+    slider.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+    slider.BorderColor3 = Color3.fromRGB(8, 8, 8)
+    slider.Position = UDim2.new(0, 0, 0, 22)
+    slider.Size = UDim2.new(0, 234, 0, 25) -- Size of the textbox frame
+    
+    -- Textbox setup (inside the slider container)
     textbox.Name = "textbox"
-    textbox.Parent = title
-    textbox.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+    textbox.Parent = slider
+    textbox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
     textbox.BorderColor3 = Color3.fromRGB(8, 8, 8)
-    textbox.Position = UDim2.new(0, 0, 0, 22)
-    textbox.Size = UDim2.new(0, 234, 0, 25)
+    textbox.Size = UDim2.new(1, 0, 1, 0)
     textbox.Font = Enum.Font.SourceSans
     textbox.Text = ""
     textbox.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -745,12 +756,14 @@ function GroupTypes:CreateBypassin(name, placeholder, callback)
     textbox.TextSize = 14
     textbox.TextStrokeTransparency = 0
 
+    -- Handle when text input is finished (on focus lost)
     textbox.FocusLost:Connect(function(enterPressed)
         if enterPressed then
             callback(textbox.Text)
         end
     end)
 
+    -- Methods to interact with the TextBox
     function TextBoxTypes:SetText(text)
         textbox.Text = text or ""
     end
@@ -761,6 +774,7 @@ function GroupTypes:CreateBypassin(name, placeholder, callback)
 
     return TextBoxTypes
 end
+
 
 
             function GroupTypes:CreateDropdown(name, options, callback)
