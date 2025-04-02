@@ -706,6 +706,7 @@ end)
 
                 return SliderTypes
             end
+            
 
 function GroupTypes:CreateBypassin(name, placeholder, callback)
     name = name or "New TextBox"
