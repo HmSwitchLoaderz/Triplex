@@ -736,7 +736,7 @@ function GroupTypes:CreateBypassin(name, placeholder, callback)
     title.TextXAlignment = Enum.TextXAlignment.Left
     title.TextYAlignment = Enum.TextYAlignment.Top
 
-    -- Frame setup (same as button background)
+    -- Frame setup (same as button background with gradient)
     frame.Name = "frame"
     frame.Parent = title
     frame.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
@@ -766,11 +766,13 @@ function GroupTypes:CreateBypassin(name, placeholder, callback)
     textbox.TextStrokeTransparency = 0
     textbox.ClearTextOnFocus = false
 
+    -- UIStroke for textbox border
     UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
     UIStroke.Color = Color3.fromRGB(8, 8, 8)
     UIStroke.Thickness = 2
     UIStroke.Parent = textbox
 
+    -- Handle the FocusLost event
     textbox.FocusLost:Connect(function(enterPressed)
         if enterPressed then
             callback(textbox.Text)
@@ -787,6 +789,7 @@ function GroupTypes:CreateBypassin(name, placeholder, callback)
 
     return TextBoxTypes
 end
+
 
 
 
