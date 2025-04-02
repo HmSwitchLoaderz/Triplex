@@ -714,11 +714,14 @@ function GroupTypes:CreateBypassin(name, placeholder, callback)
     callback = callback or function(s) print(s) end
 
     local TextBoxTypes = {}
-    
+
     local title = Instance.new("TextLabel")
+    local frame = Instance.new("Frame")
     local textbox = Instance.new("TextBox")
     local UIGradient = Instance.new("UIGradient")
+    local UIStroke = Instance.new("UIStroke")
 
+    -- Title label setup
     title.Name = "title"
     title.Parent = container_2
     title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -733,12 +736,28 @@ function GroupTypes:CreateBypassin(name, placeholder, callback)
     title.TextXAlignment = Enum.TextXAlignment.Left
     title.TextYAlignment = Enum.TextYAlignment.Top
 
+    -- Frame setup (same as button background)
+    frame.Name = "frame"
+    frame.Parent = title
+    frame.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+    frame.BorderColor3 = Color3.fromRGB(8, 8, 8)
+    frame.Position = UDim2.new(0, 0, 0, 22)
+    frame.Size = UDim2.new(0, 234, 0, 20)
+
+    UIGradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)),
+        ColorSequenceKeypoint.new(1.00, Color3.fromRGB(167, 167, 167))
+    }
+    UIGradient.Rotation = 90
+    UIGradient.Parent = frame
+
+    -- Textbox setup (transparent background, visible text)
     textbox.Name = "textbox"
-    textbox.Parent = title
-    textbox.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+    textbox.Parent = frame
+    textbox.BackgroundTransparency = 1
     textbox.BorderColor3 = Color3.fromRGB(8, 8, 8)
-    textbox.Position = UDim2.new(0, 0, 0, 22)
-    textbox.Size = UDim2.new(0, 234, 0, 20)
+    textbox.Position = UDim2.new(0, 0, 0, 0)
+    textbox.Size = UDim2.new(1, 0, 1, 0)
     textbox.Font = Enum.Font.SourceSans
     textbox.Text = ""
     textbox.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -747,14 +766,6 @@ function GroupTypes:CreateBypassin(name, placeholder, callback)
     textbox.TextStrokeTransparency = 0
     textbox.ClearTextOnFocus = false
 
-    UIGradient.Color = ColorSequence.new{
-        ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)),
-        ColorSequenceKeypoint.new(1.00, Color3.fromRGB(167, 167, 167))
-    }
-    UIGradient.Rotation = 90
-    UIGradient.Parent = textbox
-
-    local UIStroke = Instance.new("UIStroke")
     UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
     UIStroke.Color = Color3.fromRGB(8, 8, 8)
     UIStroke.Thickness = 2
@@ -776,6 +787,7 @@ function GroupTypes:CreateBypassin(name, placeholder, callback)
 
     return TextBoxTypes
 end
+
 
 
 
