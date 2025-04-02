@@ -716,10 +716,8 @@ function GroupTypes:CreateBypassin(name, placeholder, callback)
     local TextBoxTypes = {}
     
     local title = Instance.new("TextLabel")
-    local slider = Instance.new("Frame")
     local textbox = Instance.new("TextBox")
     local UIGradient = Instance.new("UIGradient")
-    local value = Instance.new("TextLabel")
 
     title.Name = "title"
     title.Parent = container_2
@@ -735,25 +733,12 @@ function GroupTypes:CreateBypassin(name, placeholder, callback)
     title.TextXAlignment = Enum.TextXAlignment.Left
     title.TextYAlignment = Enum.TextYAlignment.Top
 
-    slider.Name = "slider"
-    slider.Parent = title
-    slider.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
-    slider.BorderColor3 = Color3.fromRGB(8, 8, 8)
-    slider.Position = UDim2.new(0, 0, 0, 22)
-    slider.Size = UDim2.new(0, 234, 0, 25)
-
-    UIGradient.Color = ColorSequence.new{
-        ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)),
-        ColorSequenceKeypoint.new(1.00, Color3.fromRGB(167, 167, 167))
-    }
-    UIGradient.Rotation = 90
-    UIGradient.Parent = slider
-
     textbox.Name = "textbox"
-    textbox.Parent = slider
-    textbox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    textbox.Parent = title
+    textbox.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
     textbox.BorderColor3 = Color3.fromRGB(8, 8, 8)
-    textbox.Size = UDim2.new(1, 0, 1, 0)
+    textbox.Position = UDim2.new(0, 0, 0, 22)
+    textbox.Size = UDim2.new(0, 234, 0, 20)
     textbox.Font = Enum.Font.SourceSans
     textbox.Text = ""
     textbox.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -761,16 +746,12 @@ function GroupTypes:CreateBypassin(name, placeholder, callback)
     textbox.TextSize = 14
     textbox.TextStrokeTransparency = 0
 
-    value.Name = "value"
-    value.Parent = slider
-    value.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    value.BackgroundTransparency = 1.000
-    value.Size = UDim2.new(1, 0, 1, 0)
-    value.Font = Enum.Font.SourceSans
-    value.Text = ""
-    value.TextColor3 = Color3.fromRGB(255, 255, 255)
-    value.TextSize = 14
-    value.TextStrokeTransparency = 0
+    UIGradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)),
+        ColorSequenceKeypoint.new(1.00, Color3.fromRGB(167, 167, 167))
+    }
+    UIGradient.Rotation = 90
+    UIGradient.Parent = textbox
 
     textbox.FocusLost:Connect(function(enterPressed)
         if enterPressed then
@@ -788,6 +769,7 @@ function GroupTypes:CreateBypassin(name, placeholder, callback)
 
     return TextBoxTypes
 end
+
 
 
 
