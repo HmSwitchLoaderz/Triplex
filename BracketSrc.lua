@@ -715,12 +715,12 @@ function GroupTypes:CreateBypassin(name, placeholder, callback)
 
     local TextBoxTypes = {}
     
-    -- Create the UI elements
     local title = Instance.new("TextLabel")
+    local slider = Instance.new("Frame")
     local textbox = Instance.new("TextBox")
-    local slider = Instance.new("Frame") -- Used to keep the look of the slider
-    
-    -- Title label setup
+    local UIGradient = Instance.new("UIGradient")
+    local value = Instance.new("TextLabel")
+
     title.Name = "title"
     title.Parent = container_2
     title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -735,15 +735,20 @@ function GroupTypes:CreateBypassin(name, placeholder, callback)
     title.TextXAlignment = Enum.TextXAlignment.Left
     title.TextYAlignment = Enum.TextYAlignment.Top
 
-    -- Slider background frame (keeps the slider look)
     slider.Name = "slider"
     slider.Parent = title
     slider.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
     slider.BorderColor3 = Color3.fromRGB(8, 8, 8)
     slider.Position = UDim2.new(0, 0, 0, 22)
-    slider.Size = UDim2.new(0, 234, 0, 25) -- Size of the textbox frame
-    
-    -- Textbox setup (inside the slider container)
+    slider.Size = UDim2.new(0, 234, 0, 25)
+
+    UIGradient.Color = ColorSequence.new{
+        ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 255, 255)),
+        ColorSequenceKeypoint.new(1.00, Color3.fromRGB(167, 167, 167))
+    }
+    UIGradient.Rotation = 90
+    UIGradient.Parent = slider
+
     textbox.Name = "textbox"
     textbox.Parent = slider
     textbox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
@@ -756,14 +761,23 @@ function GroupTypes:CreateBypassin(name, placeholder, callback)
     textbox.TextSize = 14
     textbox.TextStrokeTransparency = 0
 
-    -- Handle when text input is finished (on focus lost)
+    value.Name = "value"
+    value.Parent = slider
+    value.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    value.BackgroundTransparency = 1.000
+    value.Size = UDim2.new(1, 0, 1, 0)
+    value.Font = Enum.Font.SourceSans
+    value.Text = ""
+    value.TextColor3 = Color3.fromRGB(255, 255, 255)
+    value.TextSize = 14
+    value.TextStrokeTransparency = 0
+
     textbox.FocusLost:Connect(function(enterPressed)
         if enterPressed then
             callback(textbox.Text)
         end
     end)
 
-    -- Methods to interact with the TextBox
     function TextBoxTypes:SetText(text)
         textbox.Text = text or ""
     end
@@ -774,6 +788,7 @@ function GroupTypes:CreateBypassin(name, placeholder, callback)
 
     return TextBoxTypes
 end
+
 
 
 
